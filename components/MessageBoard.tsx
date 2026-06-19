@@ -1,8 +1,9 @@
+"use-client";
+
 import { useState } from "react";
-import FilterMessage from "./components/FilterMessage";
-import DisplayMessages from "./components/DisplayMessages";
-import Box from "@mui/material/Box";
-import { Link } from "react-router";
+import FilterMessage from "@/components/FilterMessage";
+import Link from "next/link";
+import DisplayMessages from "@/components/DisplayMessages";
 
 const MessageBoard = () => {
     const [searchMessage, setSearchMessage] = useState("");
@@ -15,17 +16,15 @@ const MessageBoard = () => {
                     event: React.ChangeEvent<HTMLInputElement>,
                 ) => setSearchMessage(event.target.value)}
             />
-            <Box
-                sx={{
-                    ml: 2,
-                    mt: 2,
-                    width: 265,
-                    display: "flex",
-                    justifyContent: "flex-end",
-                }}
-            >
-                <Link to="/addmessage">Add a Message</Link>
-            </Box>
+            <div>
+                <Link
+                    className="btn rounded-lg font-normal bg-blue-700"
+                    href="/addmessage"
+                >
+                    Add a Message
+                </Link>
+            </div>
+
             <DisplayMessages searchMessage={searchMessage} />
         </>
     );

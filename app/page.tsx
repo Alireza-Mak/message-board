@@ -1,3 +1,5 @@
+import MessageBoard from "@/components/MessageBoard";
+
 export default function Home() {
-    return <p>Home</p>;
+    return <MessageBoard />;
 }

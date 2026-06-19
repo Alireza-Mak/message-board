@@ -1,6 +1,7 @@
+"use-client";
+
 import { useState } from "react";
-import EditMessageForm from "./EditMessageForm";
-import { Button, ListItem } from "@mui/material";
+import EditMessageForm from "@/components/EditMessageForm";
 import { useContext } from "react";
 import { MessagesContext } from "../contexts/MessagesContext";
 
@@ -20,7 +21,7 @@ const Message = ({ id, messageText }: MessageProps) => {
     };
 
     return (
-        <ListItem onDoubleClick={() => setIsEditable(true)}>
+        <div onDoubleClick={() => setIsEditable(true)}>
             {isEditable ? (
                 <EditMessageForm
                     messageText={messageText}
@@ -29,8 +30,8 @@ const Message = ({ id, messageText }: MessageProps) => {
             ) : (
                 messageText
             )}
-            <Button onClick={() => deleteMessage(id)}>delete</Button>
-        </ListItem>
+            <button onClick={() => deleteMessage(id)}>delete</button>
+        </div>
     );
 };
 

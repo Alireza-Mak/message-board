@@ -1,5 +1,4 @@
-import List from "@mui/material/List";
-import Message from "./Message";
+import Message from "@/components/Message";
 import { useMessages } from "../hooks/useMessages";
 
 const DisplayMessages = ({ searchMessage }: { searchMessage: string }) => {
@@ -12,7 +11,7 @@ const DisplayMessages = ({ searchMessage }: { searchMessage: string }) => {
         : messages;
 
     return (
-        <List sx={{ ml: 1 }}>
+        <div>
             {messagesToShow.map((message) => (
                 <Message
                     key={message.id}
@@ -20,7 +19,7 @@ const DisplayMessages = ({ searchMessage }: { searchMessage: string }) => {
                     messageText={message.text}
                 />
             ))}
-        </List>
+        </div>
     );
 };
 
