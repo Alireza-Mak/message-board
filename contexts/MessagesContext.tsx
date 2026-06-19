@@ -1,8 +1,9 @@
+"use client";
 import { createContext, useEffect, useState } from "react";
-import type { MessagesType } from "../App";
 
-import messageService from "../services/messageService";
-import { useNavigate } from "react-router-dom";
+import messageService from "@/services/messageService";
+import { useRouter } from "next/navigation";
+import { MessagesType } from "@/types/all";
 type StateType = {
     messages: MessagesType;
     addMessage: (newMessageText: string) => Promise<void>;
@@ -22,7 +23,7 @@ const MessagesContext = createContext<StateType>(initialState);
 
 const MessageProvider = ({ children }: { children: React.ReactNode }) => {
     const [messages, setMessages] = useState<MessagesType>([]);
-    const navigate = useNavigate();
+    const router = useRouter();
 
     useEffect(() => {
         console.log("useEffect was executed!");
@@ -52,7 +53,8 @@ const MessageProvider = ({ children }: { children: React.ReactNode }) => {
                     text: newMessageText,
                 });
                 setMessages(messages.concat(newMessageObject));
-                navigate("/");
+                // Switch from useNavigate to useRouter
+                router.push("/");
             } catch (error) {
                 console.log("API Error: " + error);
             }
