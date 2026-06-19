@@ -1,5 +1,3 @@
-"use-client";
-
 import { useState } from "react";
 import EditMessageForm from "@/components/EditMessageForm";
 import { useContext } from "react";

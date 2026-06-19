@@ -1,9 +1,8 @@
-"use-client";
-
+"use client";
 import { useState } from "react";
 import FilterMessage from "@/components/FilterMessage";
-import Link from "next/link";
 import DisplayMessages from "@/components/DisplayMessages";
+import Link from "next/link";
 
 const MessageBoard = () => {
     const [searchMessage, setSearchMessage] = useState("");
