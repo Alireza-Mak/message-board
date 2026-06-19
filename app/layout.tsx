@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { MessageProvider } from "@/contexts/MessagesContext";
+import Header from "@/components/Header";
 
 export const metadata: Metadata = {
     title: "Message Board App",
@@ -14,10 +15,13 @@ export default function RootLayout({
 }) {
     return (
         // Wrap the whole app with MessageProvider
-        <MessageProvider>
-            <html lang="en">
-                <body>{children}</body>
-            </html>
-        </MessageProvider>
+        <>
+            <Header />
+            <MessageProvider>
+                <html lang="en">
+                    <body className="min-h-screen bg-black">{children}</body>
+                </html>
+            </MessageProvider>
+        </>
     );
 }
