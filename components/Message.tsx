@@ -1,41 +1,42 @@
-import { useState } from "react";
 import EditMessageForm from "@/components/EditMessageForm";
-import { useContext } from "react";
-import { MessagesContext } from "../contexts/MessagesContext";
+import { useMessages } from "@/hooks/useMessages";
+import { MessageType } from "@/types/MessagesType";
 
 type MessageProps = {
-    id: number;
-    messageText: string;
+    message: MessageType;
+    editableMessageId: string;
+    setEditableMessageId: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const Message = ({ id, messageText }: MessageProps) => {
-    const [isEditable, setIsEditable] = useState(false);
+const Message = ({
+    message,
+    editableMessageId,
+    setEditableMessageId,
+}: MessageProps) => {
+    const { deleteMessage } = useMessages();
 
-    const { editMessage, deleteMessage } = useContext(MessagesContext);
-
-    const modifyMessage = (modifiedText: string) => {
-        editMessage(id, modifiedText);
-        setIsEditable(false);
-    };
-
+    const isEditable = editableMessageId === message.id;
     return (
         <div
-            onDoubleClick={() => setIsEditable(true)}
-            className="grid grid-cols-[1fr_auto] items-center gap-4 border-b border-neutral-800 bg-neutral-900 px-4 py-4 last:border-b-0 odd:bg-neutral-950"
+            onDoubleClick={() => setEditableMessageId(message.id)}
+            className="cursor-pointer grid grid-cols-[1fr_auto] 
+            items-center gap-4 border-b border-neutral-800
+            bg-neutral-700 px-4 py-4 hover:odd:bg-neutral-950
+            hover:bg-neutral-800 last:border-b-0 odd:bg-neutral-900"
         >
             <div className="text-white">
                 {isEditable ? (
                     <EditMessageForm
-                        messageText={messageText}
-                        modifyMessage={modifyMessage}
+                        message={message}
+                        setDeactivateEditing={() => setEditableMessageId("")}
                     />
                 ) : (
-                    messageText
+                    message.text
                 )}
             </div>
             <button
-                onClick={() => deleteMessage(id)}
-                className="flex h-8 w-8 items-center justify-center rounded-full bg-red-600 text-white transition hover:bg-red-700"
+                onClick={() => deleteMessage(message.id)}
+                className="flex h-8 cursor-pointer w-15 items-center justify-center rounded bg-red-600 text-white transition hover:bg-red-700"
             >
                 delete
             </button>

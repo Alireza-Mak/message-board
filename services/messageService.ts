@@ -10,12 +10,12 @@ const create = (object: ObjectType) =>
         .post(`${process.env.NEXT_PUBLIC_SERVICE_URL}`, object)
         .then((response) => response.data);
 
-const update = (id: number, object: ObjectType) =>
+const update = (id: string, object: ObjectType) =>
     axios
         .patch(`${process.env.NEXT_PUBLIC_SERVICE_URL}/${id}`, object)
         .then((response) => response.data);
 
-const deleteOne = (id: number) =>
+const deleteOne = (id: string) =>
     axios
         .delete(`${process.env.NEXT_PUBLIC_SERVICE_URL}/${id}`)
         .then((response) => response.data);

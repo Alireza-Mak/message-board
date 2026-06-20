@@ -8,10 +8,10 @@ type StateType = {
     messages: MessagesType;
     addMessage: (newMessageText: string) => Promise<void>;
     editMessage: (
-        modifiedMessageId: number,
+        modifiedMessageId: string,
         modifiedMessageText: string,
     ) => Promise<void>;
-    deleteMessage: (messageId: number) => Promise<void>;
+    deleteMessage: (messageId: string) => Promise<void>;
 };
 const initialState: StateType = {
     messages: [],
@@ -62,7 +62,7 @@ const MessageProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const editMessage = async (
-        modifiedMessageId: number,
+        modifiedMessageId: string,
         modifiedMessageText: string,
     ) => {
         const newMessages = messages.map((message) =>
@@ -81,7 +81,7 @@ const MessageProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
-    const deleteMessage = async (messageId: number) => {
+    const deleteMessage = async (messageId: string) => {
         try {
             await messageService.deleteOne(messageId);
             setMessages(messages.filter((message) => message.id !== messageId));

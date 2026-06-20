@@ -19,7 +19,11 @@ export default function RootLayout({
             <Header />
             <MessageProvider>
                 <html lang="en">
-                    <body className="min-h-screen bg-black">{children}</body>
+                    <body className="min-h-screen bg-black">
+                        <main className="flex flex-col items-center gap-6 px-4 py-6">
+                            {children}
+                        </main>
+                    </body>
                 </html>
             </MessageProvider>
         </>

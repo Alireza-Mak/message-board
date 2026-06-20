@@ -1,8 +1,10 @@
 import Message from "@/components/Message";
 import { useMessages } from "../hooks/useMessages";
+import { useState } from "react";
 
 const DisplayMessages = ({ searchMessage }: { searchMessage: string }) => {
     const { messages } = useMessages();
+    const [editableMessageId, setEditableMessageId] = useState<string>("");
 
     const messagesToShow = searchMessage
         ? messages.filter((message) =>
@@ -21,8 +23,9 @@ const DisplayMessages = ({ searchMessage }: { searchMessage: string }) => {
                 {messagesToShow.map((message) => (
                     <Message
                         key={message.id}
-                        id={message.id}
-                        messageText={message.text}
+                        message={message}
+                        editableMessageId={editableMessageId}
+                        setEditableMessageId={setEditableMessageId}
                     />
                 ))}
             </div>

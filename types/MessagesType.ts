@@ -1,6 +1,6 @@
 interface MessageType {
     text: string;
-    id: number;
+    id: string;
 }
 type MessagesType = MessageType[];
 export type { MessageType, MessagesType };
