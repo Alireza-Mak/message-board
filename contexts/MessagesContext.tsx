@@ -39,6 +39,10 @@ const MessageProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     const addMessage = async (newMessageText: string) => {
+        const bearerAuthHeader = {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        };
+
         if (
             messages.some(
                 (message) =>
@@ -50,9 +54,12 @@ const MessageProvider = ({ children }: { children: React.ReactNode }) => {
             // POST Request
             try {
                 const newMessageObject = await messageService.create({
-                    text: newMessageText,
+                    object: { text: newMessageText },
+                    reqConfig: bearerAuthHeader,
                 });
+
                 setMessages(messages.concat(newMessageObject));
+
                 // Switch from useNavigate to useRouter
                 router.push("/");
             } catch (error) {

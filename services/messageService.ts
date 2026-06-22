@@ -1,13 +1,19 @@
 import axios from "axios";
+type CreateObjectType = {
+    object: ObjectType;
+    reqConfig: { Authorization: string };
+};
 type ObjectType = { text: string };
 const getAll = () =>
     axios
         .get(`${process.env.NEXT_PUBLIC_SERVICE_URL}`)
         .then((response) => response.data);
 
-const create = (object: ObjectType) =>
+const create = ({ object, reqConfig }: CreateObjectType) =>
     axios
-        .post(`${process.env.NEXT_PUBLIC_SERVICE_URL}`, object)
+        .post(`${process.env.NEXT_PUBLIC_SERVICE_URL}`, object, {
+            headers: reqConfig,
+        })
         .then((response) => response.data);
 
 const update = (id: string, object: ObjectType) =>

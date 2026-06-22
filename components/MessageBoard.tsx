@@ -1,13 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FilterMessage from "@/components/FilterMessage";
 import DisplayMessages from "@/components/DisplayMessages";
 import Link from "next/link";
+import LoginForm from "./LoginForm";
+import Loading from "./Loading";
+import auth from "@/utils/auth";
 
 const MessageBoard = () => {
     const [searchMessage, setSearchMessage] = useState("");
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(
+        null,
+    );
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setIsAuthenticated(auth.tokenExists());
+    }, []);
 
+    if (isAuthenticated === null) return <Loading />;
+    if (!isAuthenticated) return <LoginForm setIsAuth={setIsAuthenticated} />;
     return (
         <>
             <FilterMessage
