@@ -1,12 +1,13 @@
 import { useMessages } from "@/hooks/useMessages";
 import { messageSchema } from "@/schemas/messageSchema";
-import { MessageType } from "@/types/MessagesType";
+import { MessageType } from "@/types/all";
 import { useEffect, useRef, useState } from "react";
 
 type EditMessageFormProps = {
     message: MessageType;
     setDeactivateEditing: () => void;
 };
+
 const EditMessageForm = ({
     message,
     setDeactivateEditing,

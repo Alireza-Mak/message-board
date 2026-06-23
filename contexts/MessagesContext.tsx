@@ -3,17 +3,9 @@ import { createContext, useEffect, useState } from "react";
 
 import messageService from "@/services/messageService";
 import { useRouter } from "next/navigation";
-import { MessagesType } from "@/types/all";
+import { MessagesType, StateType } from "@/types/all";
 import auth from "@/utils/auth";
-type StateType = {
-    messages: MessagesType;
-    addMessage: (newMessageText: string) => Promise<void>;
-    editMessage: (
-        modifiedMessageId: string,
-        modifiedMessageText: string,
-    ) => Promise<void>;
-    deleteMessage: (messageId: string) => Promise<void>;
-};
+
 const initialState: StateType = {
     messages: [],
     addMessage: async () => {},

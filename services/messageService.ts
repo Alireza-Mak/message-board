@@ -1,38 +1,30 @@
+import {
+    CreateMsgObjType,
+    UpdateMsgObjType,
+    DeleteMsgObjType,
+} from "@/types/all";
 import axios from "axios";
-type CreateObjectType = {
-    object: { text: string , owner: string};
-    reqConfig: { Authorization: string };
-};
-type UpdateObjectType = {
-    id: string;
-    object: ObjectType;
-    reqConfig: { Authorization: string };
-};
-type DeleteObjectType = {
-    id: string;
-    reqConfig: { Authorization: string };
-};
-type ObjectType = { text: string };
+
 const getAll = () =>
     axios
         .get(`${process.env.NEXT_PUBLIC_SERVICE_URL}`)
         .then((response) => response.data);
 
-const create = ({ object, reqConfig }: CreateObjectType) =>
+const create = ({ object, reqConfig }: CreateMsgObjType) =>
     axios
         .post(`${process.env.NEXT_PUBLIC_SERVICE_URL}`, object, {
             headers: reqConfig,
         })
         .then((response) => response.data);
 
-const update = ({ id, object, reqConfig }: UpdateObjectType) =>
+const update = ({ id, object, reqConfig }: UpdateMsgObjType) =>
     axios
         .patch(`${process.env.NEXT_PUBLIC_SERVICE_URL}/${id}`, object, {
             headers: reqConfig,
         })
         .then((response) => response.data);
 
-const deleteOne = ({ id, reqConfig }: DeleteObjectType) =>
+const deleteOne = ({ id, reqConfig }: DeleteMsgObjType) =>
     axios
         .delete(`${process.env.NEXT_PUBLIC_SERVICE_URL}/${id}`, {
             headers: reqConfig,

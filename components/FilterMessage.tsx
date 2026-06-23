@@ -1,13 +1,14 @@
-type FilterMessageType = {
+type FilterMessageProps = {
     searchMessage: string;
     handleSearchMessageChange: (
         event: React.ChangeEvent<HTMLInputElement>,
     ) => void;
 };
+
 const FilterMessage = ({
     searchMessage,
     handleSearchMessageChange,
-}: FilterMessageType) => (
+}: FilterMessageProps) => (
     <div className="flex w-full flex-col gap-2 md:w-1/2">
         <label className="font-semibold text-white">Filter Messages:</label>
 

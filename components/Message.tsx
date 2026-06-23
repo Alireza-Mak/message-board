@@ -1,6 +1,6 @@
 import EditMessageForm from "@/components/EditMessageForm";
 import { useMessages } from "@/hooks/useMessages";
-import { MessageType } from "@/types/MessagesType";
+import { MessageType } from "@/types/all";
 
 type MessageProps = {
     message: MessageType;

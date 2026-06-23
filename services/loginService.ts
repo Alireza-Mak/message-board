@@ -1,7 +1,7 @@
+import { LoginObjectType } from "@/types/all";
 import axios from "axios";
-type ObjectType = { username: string; password: string };
 
-const loginService = (object: ObjectType) =>
+const loginService = (object: LoginObjectType) =>
     axios
         .post(`${process.env.NEXT_PUBLIC_LOGIN_URL}`, object)
         .then((response) => response.data);
