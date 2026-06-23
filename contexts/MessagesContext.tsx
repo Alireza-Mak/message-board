@@ -72,6 +72,10 @@ const MessageProvider = ({ children }: { children: React.ReactNode }) => {
         modifiedMessageId: string,
         modifiedMessageText: string,
     ) => {
+        const bearerAuthHeader = {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        };
+
         const newMessages = messages.map((message) =>
             message.id === modifiedMessageId
                 ? { ...message, text: modifiedMessageText }
@@ -79,8 +83,10 @@ const MessageProvider = ({ children }: { children: React.ReactNode }) => {
         );
 
         try {
-            await messageService.update(modifiedMessageId, {
-                text: modifiedMessageText,
+            await messageService.update({
+                id: modifiedMessageId,
+                object: { text: modifiedMessageText },
+                reqConfig: bearerAuthHeader,
             });
             setMessages(newMessages);
         } catch (error) {
@@ -89,8 +95,15 @@ const MessageProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const deleteMessage = async (messageId: string) => {
+        const bearerAuthHeader = {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        };
+
         try {
-            await messageService.deleteOne(messageId);
+            await messageService.deleteOne({
+                id: messageId,
+                reqConfig: bearerAuthHeader,
+            });
             setMessages(messages.filter((message) => message.id !== messageId));
         } catch (error) {
             console.log("API Error: " + error);

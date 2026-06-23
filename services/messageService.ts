@@ -3,6 +3,15 @@ type CreateObjectType = {
     object: ObjectType;
     reqConfig: { Authorization: string };
 };
+type UpdateObjectType = {
+    id: string;
+    object: ObjectType;
+    reqConfig: { Authorization: string };
+};
+type DeleteObjectType = {
+    id: string;
+    reqConfig: { Authorization: string };
+};
 type ObjectType = { text: string };
 const getAll = () =>
     axios
@@ -16,14 +25,18 @@ const create = ({ object, reqConfig }: CreateObjectType) =>
         })
         .then((response) => response.data);
 
-const update = (id: string, object: ObjectType) =>
+const update = ({ id, object, reqConfig }: UpdateObjectType) =>
     axios
-        .patch(`${process.env.NEXT_PUBLIC_SERVICE_URL}/${id}`, object)
+        .patch(`${process.env.NEXT_PUBLIC_SERVICE_URL}/${id}`, object, {
+            headers: reqConfig,
+        })
         .then((response) => response.data);
 
-const deleteOne = (id: string) =>
+const deleteOne = ({ id, reqConfig }: DeleteObjectType) =>
     axios
-        .delete(`${process.env.NEXT_PUBLIC_SERVICE_URL}/${id}`)
+        .delete(`${process.env.NEXT_PUBLIC_SERVICE_URL}/${id}`, {
+            headers: reqConfig,
+        })
         .then((response) => response.data);
 
 const messageService = {
