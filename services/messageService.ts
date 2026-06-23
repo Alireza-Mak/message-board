@@ -1,6 +1,6 @@
 import axios from "axios";
 type CreateObjectType = {
-    object: ObjectType;
+    object: { text: string , owner: string};
     reqConfig: { Authorization: string };
 };
 type UpdateObjectType = {

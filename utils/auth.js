@@ -12,6 +12,12 @@ const hasTokenExpired = () => {
     }
     return false;
 };
+const getLoggedInUsername = () => {
+    const token = sessionStorage.getItem("token");
+    if (!token) return "none";
 
-const auth = { setToken, tokenExists, hasTokenExpired };
+    return jwtDecode(token).username;
+};
+
+const auth = { setToken, tokenExists, hasTokenExpired, getLoggedInUsername };
 export default auth;

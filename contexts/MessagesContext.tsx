@@ -4,6 +4,7 @@ import { createContext, useEffect, useState } from "react";
 import messageService from "@/services/messageService";
 import { useRouter } from "next/navigation";
 import { MessagesType } from "@/types/all";
+import auth from "@/utils/auth";
 type StateType = {
     messages: MessagesType;
     addMessage: (newMessageText: string) => Promise<void>;
@@ -54,7 +55,10 @@ const MessageProvider = ({ children }: { children: React.ReactNode }) => {
             // POST Request
             try {
                 const newMessageObject = await messageService.create({
-                    object: { text: newMessageText },
+                    object: {
+                        text: newMessageText,
+                        owner: auth.getLoggedInUsername(),
+                    },
                     reqConfig: bearerAuthHeader,
                 });
 
