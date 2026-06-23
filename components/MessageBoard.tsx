@@ -15,7 +15,7 @@ const MessageBoard = () => {
     );
     useEffect(() => {
         // eslint-disable-next-line react-hooks/set-state-in-effect
-        setIsAuthenticated(auth.tokenExists());
+        setIsAuthenticated(auth.tokenExists() && !auth.hasTokenExpired());
     }, []);
 
     if (isAuthenticated === null) return <Loading />;
