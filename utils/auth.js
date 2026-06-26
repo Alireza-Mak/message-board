@@ -18,6 +18,13 @@ const getLoggedInUsername = () => {
 
     return jwtDecode(token).username;
 };
+const removeToken = () => sessionStorage.removeItem("token");
 
-const auth = { setToken, tokenExists, hasTokenExpired, getLoggedInUsername };
+const auth = {
+    setToken,
+    tokenExists,
+    hasTokenExpired,
+    getLoggedInUsername,
+    removeToken,
+};
 export default auth;

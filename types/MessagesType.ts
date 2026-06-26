@@ -1,6 +1,7 @@
 interface MessageType {
     text: string;
     id: string;
+    owner: string;
 }
 
 type MessagesType = MessageType[];

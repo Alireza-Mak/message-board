@@ -17,7 +17,10 @@ const MessageBoard = () => {
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setIsAuthenticated(auth.tokenExists() && !auth.hasTokenExpired());
     }, []);
-
+    function handleLogout() {
+        setIsAuthenticated(false);
+        auth.removeToken();
+    }
     if (isAuthenticated === null) return <Loading />;
     if (!isAuthenticated) return <LoginForm setIsAuth={setIsAuthenticated} />;
     return (
@@ -37,6 +40,13 @@ const MessageBoard = () => {
             </Link>
 
             <DisplayMessages searchMessage={searchMessage} />
+            <Link
+                className="absolute top-4 right-4 rounded-lg bg-purple-600 px-6 py-3 text-white transition hover:bg-purple-700"
+                onClick={handleLogout}
+                href="/"
+            >
+                Logout
+            </Link>
         </>
     );
 };

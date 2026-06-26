@@ -18,7 +18,7 @@ export default function RootLayout({
             <body className="min-h-screen bg-black">
                 <Header />
                 <MessageProvider>
-                    <main className="flex flex-col items-center gap-6 px-4 py-6">
+                    <main className="relative flex flex-col items-center gap-6 px-4 py-6">
                         {children}
                     </main>
                 </MessageProvider>

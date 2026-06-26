@@ -20,9 +20,7 @@ function LoginForm({
             setError("");
             const result = userSchema.safeParse({ username, password });
             if (!result.success) {
-                throw new Error(
-                    result.error.issues.map((i) => i.message).join(", "),
-                );
+                throw new Error("Username or password is not correct.");
             }
             const response = await loginService(result.data);
             auth.setToken(response.token);
