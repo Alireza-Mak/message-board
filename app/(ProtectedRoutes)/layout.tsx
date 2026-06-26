@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import auth from "@/utils/auth";
 import Loading from "@/components/Loading";
+import TopBar from "@/components/TopBar";
+import useAuth from "@/hooks/useAuth";
 
 export default function ProtectedLayout({
     children,
@@ -11,18 +12,20 @@ export default function ProtectedLayout({
     children: React.ReactNode;
 }) {
     const router = useRouter();
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(
-        null,
-    );
+    const { isAuthenticated } = useAuth();
 
     useEffect(() => {
-        if (!auth.tokenExists() || auth.hasTokenExpired()) {
+        if (!isAuthenticated) {
             router.replace("/");
-        } else {
-            // eslint-disable-next-line react-hooks/set-state-in-effect
-            setIsAuthenticated(false);
         }
-    }, [router]);
-    if (isAuthenticated === null) return <Loading />;
-    return <>{children}</>;
+    }, [isAuthenticated, router]);
+
+    if (!isAuthenticated) return <Loading />;
+
+    return (
+        <>
+            <TopBar />
+            {children}
+        </>
+    );
 }

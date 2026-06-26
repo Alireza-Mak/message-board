@@ -1,3 +1,4 @@
+import { AuthStateType } from "./AuthType";
 import { MessageType, MessagesType } from "./MessagesType";
 import { StateType } from "./StateType";
 import {
@@ -15,4 +16,5 @@ export type {
     LoginObjectType,
     UpdateMsgObjType,
     StateType,
+    AuthStateType,
 };

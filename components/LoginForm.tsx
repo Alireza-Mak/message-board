@@ -1,17 +1,15 @@
 import { userSchema } from "@/schemas/userSchema";
 import loginService from "@/services/loginService";
-import React, { SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import auth from "@/utils/auth";
+import useAuth from "@/hooks/useAuth";
 
-function LoginForm({
-    setIsAuth,
-}: {
-    setIsAuth: React.Dispatch<SetStateAction<boolean | null>>;
-}) {
+function LoginForm() {
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string>("");
 
+    const { setAuthentication } = useAuth();
     const handleSubmitForm = async (
         event: React.SubmitEvent<HTMLFormElement>,
     ) => {
@@ -24,11 +22,12 @@ function LoginForm({
             }
             const response = await loginService(result.data);
             auth.setToken(response.token);
-            setIsAuth(true);
+            setAuthentication(true);
         } catch (error) {
             if (error instanceof Error) setError(error.message);
         }
     };
+
     return (
         <form
             onSubmit={handleSubmitForm}

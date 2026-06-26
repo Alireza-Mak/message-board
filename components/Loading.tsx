@@ -14,7 +14,7 @@ const Loading = () => {
 
                 <div className="text-center">
                     <p className="font-semibold text-white">
-                        Loading message board
+                        Loading message board application
                     </p>
                     <p className="mt-1 text-sm text-gray-400">
                         Checking your session...
