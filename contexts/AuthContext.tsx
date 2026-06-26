@@ -2,6 +2,7 @@
 import auth from "@/utils/auth";
 import { createContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { AuthStateType } from "@/types/AuthType";
 
 const initAuthState: AuthStateType = {
     isAuthenticated: null,
