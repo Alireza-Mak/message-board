@@ -14,18 +14,15 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        // Wrap the whole app with MessageProvider
-        <>
-            <Header />
-            <MessageProvider>
-                <html lang="en">
-                    <body className="min-h-screen bg-black">
-                        <main className="flex flex-col items-center gap-6 px-4 py-6">
-                            {children}
-                        </main>
-                    </body>
-                </html>
-            </MessageProvider>
-        </>
+        <html lang="en">
+            <body className="min-h-screen bg-black">
+                <Header />
+                <MessageProvider>
+                    <main className="flex flex-col items-center gap-6 px-4 py-6">
+                        {children}
+                    </main>
+                </MessageProvider>
+            </body>
+        </html>
     );
 }
